@@ -24,7 +24,7 @@ public class BallController : MonoBehaviour
         }
 
         //공을 카메라 전방 하단에 배치한다
-        SetBallPosition(camera.main.transform);
+        SetBallPosition(Camera.main.transform);
 
         if(Input.touchCount > 0 && isReady)
         {
@@ -43,7 +43,7 @@ public class BallController : MonoBehaviour
                 float dragDistance = touch.position.y - startPos.y;
 
                 //AR 카메라를 기준으로 던질 방향(전방 45도 위쪽)을 설정한다
-                Vector3 throwAngle = (Camera.main.transform.forward + camera.main.transform.up).normalized;
+                Vector3 throwAngle = (Camera.main.transform.forward + Camera.main.transform.up).normalized;
 
                 //물리 능력을 활성화하고 준비 상태를 false로 바꿔 놓는다
                 rb.isKinematic = false;
