@@ -290,13 +290,14 @@ GameObject:
   - component: {fileID: 995133463}
   - component: {fileID: 995133462}
   - component: {fileID: 995133466}
+  - component: {fileID: 995133467}
   m_Layer: 0
   m_Name: CatchBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!135 &995133462
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -389,6 +390,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &995133467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995133461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21d89ffbec7cf5b46937dd376a0d8f25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1807813866
 GameObject:
   m_ObjectHideFlags: 0
