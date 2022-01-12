@@ -29,15 +29,21 @@ public class MultipleImageTracker : MonoBehaviour
             //만일, 검색된 프리팹이 존재한다면
             if(imagePrefab != null)
             {
-                //이미지의 위치에 프리팹을 생성한다
+                //이미지의 위치에 프리팹을 생성하고 이미지의 자식 오브젝트로 등록한다
                 GameObject go = Instantiate(imagePrefab, trackedImage.transform.position, trackedImage.transform.rotation);
+                go.transform.SetParent(trackedImage.transform);
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //인식 중인 이미지들을 모두 순회한다
+        foreach (ARTrackedImage trackedImage in args.updated)
+        {
+            //이미지에 등록된 자식 오브젝트가 있다면
+            if (trackedImage.transform.childCount > 0)
+            {
+                //자식 오브젝트의 위치를 이미지의 위치와 동기화한다
+                trackedImage.transform.GetChild(0).position = trackedImage.transform.position;
+                trackedImage.transform.GetChild(0).rotation = trackedImage.transform.rotation;
+            }
+        }
     }
 }
