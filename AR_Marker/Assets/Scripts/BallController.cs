@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
+    public float resetTime = 3.0f;
+
     Rigidbody rb;
     bool isReady = true;
     Vector2 startPos;
@@ -51,6 +53,9 @@ public class BallController : MonoBehaviour
 
                 //던질 방향 * 손가락 드래그 거리만큼 공에 물리적 힘을 가한다
                 rb.AddForce(throwAngle * dragDistance * 0.005f, ForceMode.VelocityChange);
+
+                //3초 후에 공의 위치 및 속도를 초기화
+                Invoke("ResetBall", resetTime);
             }
         }
     }
@@ -61,5 +66,14 @@ public class BallController : MonoBehaviour
         Vector3 offset = anchor.forward * 0.5f + anchor.up * -0.2f;
         //공의 위치를 카메라 위치에서 특정 위치만큼 이동된 거리로 정함
         transform.position = anchor.position + offset;
+    }
+    private void ResetBall()
+    {
+        //물리능력을 비활성화하고 속도도 초기화한다
+        rb.isKinematic = true;
+        rb.velocity = Vector3.zero;
+
+        //준비 상태로 변경한다
+        isReady = true;
     }
 }
