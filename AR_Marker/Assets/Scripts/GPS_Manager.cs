@@ -67,5 +67,12 @@ public class GPS_Manager : MonoBehaviour
             latitude_text.text = "응답 대기 시간 초과";
             longtitude_text.text = "응답 대기 시간 초과";
         }
+
+        //수신된 GPS 데이터를 화면에 출력한다
+        LocationInfo li = Input.location.lastData;
+        latitude = li.latitude;
+        longtitude = li.longitude;
+        latitude_text.text = "위도 : " + latitude.ToString();
+        longtitude_text.text = "경도 : " + longtitude.ToString();
     }
 }
