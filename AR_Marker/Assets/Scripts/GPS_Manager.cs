@@ -53,5 +53,19 @@ public class GPS_Manager : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
             waitTime++;
         }
+
+        //수신 실패 시 수신이 실패됐다는 것을 출력
+        if(Input.location.status == LocationServiceStatus.Failed)
+        {
+            latitude_text.text = "위치 정보 수신 실패";
+            longtitude_text.text = "위치 정보 수신 실패";
+        }
+
+        //응답 대기 시간을 넘어가도록 수신이 없었다면 시간 초과됐음을 출력한다
+        if(waitTime >= maxWaitTime)
+        {
+            latitude_text.text = "응답 대기 시간 초과";
+            longtitude_text.text = "응답 대기 시간 초과";
+        }
     }
 }
