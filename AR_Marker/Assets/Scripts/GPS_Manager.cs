@@ -9,10 +9,13 @@ public class GPS_Manager : MonoBehaviour
     //텍스트 UI 변수
     public Text latitude_text;
     public Text longtitude_text;
+    public float maxWaitTime = 10.0f;
 
     //위도 경도 변수
     public float latitude = 0;
     public float longtitude = 0;
+
+    float waitTime = 0;
 
     void Start()
     {
@@ -39,6 +42,16 @@ public class GPS_Manager : MonoBehaviour
             latitude_text.text = "GPS Off";
             longtitude_text.text = "GPS Off";
             yield break;
+        }
+
+        //위치 데이터를 요청한다 -> 수신 대기
+        Input.location.Start();
+
+        //GPS 수신 상태가 초기 상태에서 일정 시간 동안 대기한다
+        while(Input.location.status == LocationServiceStatus.Initializing && waitTime < maxWaitTime)
+        {
+            yield return new WaitForSeconds(1.0f);
+            waitTime++;
         }
     }
 }
