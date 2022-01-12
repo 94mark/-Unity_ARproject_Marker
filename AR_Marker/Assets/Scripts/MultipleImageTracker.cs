@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.XR.ARFoundation;
+
+public class MultipleImageTracker : MonoBehaviour
+{
+    ARTrackedImageManager imageManager;
+    // Start is called before the first frame update
+    void Start()
+    {
+        imageManager = GetComponent<ARTrackedImageManager>();
+
+        //이미지 인식 델리게이트에 실행될 함수를 연결한다
+        imageManager.trackedImagesChanged += OnTrackedImage;
+    }
+
+    public void OnTrackedImage(ARTrackedImagesChangedEventArgs args)
+    {
+        //새로 인식한 이미지들을 모두 순회한다
+        foreach(ARTrackedImage trackedImage in args.added)
+        {
+            //이미지 라이브러리에서 인식한 이미지의 이름을 읽어온다
+            string imageName = trackedImage.referenceImage.name;
+
+            //Resources 폴더에서 인식한 이미지의 이름과 동일한 이름의 프리팹을 찾는다
+            GameObject imagePrefab = Resources.Load<GameObject>(imageName);
+
+            //만일, 검색된 프리팹이 존재한다면
+            if(imagePrefab != null)
+            {
+                //이미지의 위치에 프리팹을 생성한다
+                GameObject go = Instantiate(imagePrefab, trackedImage.transform.position, trackedImage.transform.rotation);
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
